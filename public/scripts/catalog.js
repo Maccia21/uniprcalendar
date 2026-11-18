@@ -3,7 +3,7 @@
     let pending = null;
     window.loadCatalog = function () {
         if (!pending) {
-            pending = fetch("/data/catalog.json").then(function (r) {
+            pending = fetch("/data/catalog.json", { cache: "no-cache" }).then(function (r) {
                 if (!r.ok) throw new Error("catalog " + r.status);
                 return r.json();
             });

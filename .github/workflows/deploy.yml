@@ -1,0 +1,51 @@
+# Test + pubblicazione su Cloudflare Pages.
+# - push su main: pubblica il sito
+# - ogni lunedì (o a mano): rigenera catalogo e pagine corso, li committa e pubblica
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+  schedule:
+    - cron: "0 4 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Test
+        run: npm test
+
+      - name: Aggiorna catalogo e pagine corso
+        if: github.event_name != 'push'
+        run: |
+          node scripts/build-catalog.mjs
+          node scripts/build-pages.mjs
+          git add public/data public/corsi public/sitemap.xml
+          if git diff --cached --quiet; then
+            echo "Catalogo invariato"
+          else
+            git config user.name "catalog-bot"
+            git config user.email "actions@users.noreply.github.com"
+            git commit -m "chore: aggiorna catalogo corsi"
+            git push
+          fi
+
+      - name: Pubblica su Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || secrets.CLOUDFARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+        run: npx --yes wrangler@4 pages deploy public --project-name uniprcalendar --branch master --commit-dirty=true

@@ -5,6 +5,8 @@ Stesso funzionamento di [UniboCalendar](https://github.com/FrancescoBonzi/UniboC
 
 > 🌐 **Online:** https://uniprcalendar.pages.dev
 >
+> 🌐 **Online:** https://uniprcalendar.pages.dev
+>
 > Sito indipendente, non affiliato a UNIPR. Gli orari vengono letti dal portale pubblico https://agendastudenti.unipr.it/.
 
 ## Come funziona
@@ -28,7 +30,7 @@ Stesso funzionamento di [UniboCalendar](https://github.com/FrancescoBonzi/UniboC
 4. Deploy. La cartella `functions/` viene riconosciuta da sola.
 5. Aggiorna il link «Codice sorgente» nel footer delle tre pagine HTML con l'indirizzo del tuo repository.
 
-Il workflow `.github/workflows/catalog.yml` rigenera il catalogo ogni lunedì (e quando lo lanci a mano da GitHub → Actions) e lo committa: Cloudflare ripubblica da solo. A settembre prende automaticamente il nuovo anno accademico.
+Il workflow `.github/workflows/deploy.yml` pubblica su Cloudflare a ogni push su `master` e ogni lunedì rigenera catalogo e pagine corso (anche a mano da GitHub → Actions). Servono il secret `CLOUDFLARE_API_TOKEN` e la variabile `CLOUDFLARE_ACCOUNT_ID`. A settembre prende automaticamente il nuovo anno accademico.
 
 ## Sviluppo
 

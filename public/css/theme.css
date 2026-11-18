@@ -3,8 +3,8 @@
 :root {
     color-scheme: light;
     --bg: #f3f5fa;
-    --bg-glow-1: rgba(99, 102, 241, 0.16);
-    --bg-glow-2: rgba(236, 72, 153, 0.10);
+    --bg-glow-1: rgba(0, 94, 184, 0.12);
+    --bg-glow-2: rgba(2, 30, 78, 0.08);
     --surface: #ffffff;
     --surface-2: #f7f9fc;
     --border: #e2e8f0;
@@ -22,8 +22,8 @@
     :root:not([data-theme="light"]) {
         color-scheme: dark;
         --bg: #0b1220;
-        --bg-glow-1: rgba(99, 102, 241, 0.22);
-        --bg-glow-2: rgba(236, 72, 153, 0.12);
+        --bg-glow-1: rgba(0, 94, 184, 0.30);
+        --bg-glow-2: rgba(94, 168, 255, 0.10);
         --surface: #131c2e;
         --surface-2: #1a253b;
         --border: #2a3650;
@@ -40,8 +40,8 @@
 :root[data-theme="dark"] {
     color-scheme: dark;
     --bg: #0b1220;
-    --bg-glow-1: rgba(99, 102, 241, 0.22);
-    --bg-glow-2: rgba(236, 72, 153, 0.12);
+    --bg-glow-1: rgba(0, 94, 184, 0.30);
+    --bg-glow-2: rgba(94, 168, 255, 0.10);
     --surface: #131c2e;
     --surface-2: #1a253b;
     --border: #2a3650;
@@ -102,7 +102,8 @@ html, body {
 }
 
 .brand .accent {
-    background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    background: linear-gradient(90deg, #005eb8, #004f9f);
+    color: #fff;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -391,7 +392,7 @@ input[type="submit"].btn-primary {
 }
 
 .step-number {
-    background: linear-gradient(135deg, var(--accent), var(--accent-2)) !important;
+    background: linear-gradient(135deg, #005eb8, #021e4e) !important;
 }
 
 .raw-link-card {
