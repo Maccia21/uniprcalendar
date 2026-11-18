@@ -1,0 +1,14 @@
+{
+  "name": "uniprcalendar",
+  "version": "1.0.0",
+  "description": "Aggiungi l'orario delle lezioni UNIPR al tuo calendario (Google, Apple, Outlook). Fork di UniboCalendar per Cloudflare Pages.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "catalog": "node scripts/build-catalog.mjs && node scripts/build-pages.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "dev": "npx wrangler@4 pages dev public",
+    "pages": "node scripts/build-pages.mjs"
+  },
+  "license": "AGPL-3.0-or-later"
+}

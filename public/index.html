@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Orario lezioni UNIPR (Università di Parma) su Google Calendar, Apple Calendar e Outlook. Scegli corso e insegnamenti: il calendario si aggiorna da solo. Gratis.">
+  <meta name="theme-color" content="#005eb8">
+  <title>UNIPR Calendar · Orario lezioni Unipr su Google e Apple Calendar</title>
+  <meta name="google-site-verification" content="_7X8yyrDW3LMzH5fqjHSxuzLmiEJLPiv3KDc89xlHA4">
+  <link rel="canonical" href="https://uniprcalendar.pages.dev/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="UNIPR Calendar">
+  <meta property="og:title" content="UNIPR Calendar · orario lezioni nel tuo calendario">
+  <meta property="og:description" content="Orario lezioni UNIPR (Università di Parma) su Google Calendar, Apple Calendar e Outlook. Scegli corso e insegnamenti: il calendario si aggiorna da solo. Gratis.">
+  <meta property="og:url" content="https://uniprcalendar.pages.dev/">
+  <meta property="og:locale" content="it_IT">
+  <meta property="og:image" content="https://uniprcalendar.pages.dev/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"UNIPR Calendar","url":"https://uniprcalendar.pages.dev/","applicationCategory":"EducationalApplication","operatingSystem":"Web","inLanguage":"it","description":"Orario lezioni UNIPR (Università di Parma) su Google Calendar, Apple Calendar e Outlook. Scegli corso e insegnamenti: il calendario si aggiorna da solo. Gratis.","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}
+  </script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Come aggiungo l'orario delle lezioni UNIPR a Google Calendar?", "acceptedAnswer": {"@type": "Answer", "text": "Scegli dipartimento, corso, anno e curriculum, seleziona gli insegnamenti che segui e clicca «Copia URL e Apri Google Calendar». Incolla il link in «Da URL» e il calendario compare tra i tuoi calendari."}}, {"@type": "Question", "name": "Funziona anche con iPhone, Apple Calendar e Outlook?", "acceptedAnswer": {"@type": "Answer", "text": "Sì. Il calendario è un normale feed iCal (.ics): su iPhone e Mac si apre con «Apri Apple Calendar», in Outlook o Thunderbird basta aggiungere il link come calendario da Internet."}}, {"@type": "Question", "name": "Il calendario si aggiorna se cambia l'orario?", "acceptedAnswer": {"@type": "Answer", "text": "Sì. Le lezioni vengono lette dal portale orari pubblico di UNIPR: quando cambia un'aula, un orario o una lezione viene annullata, il tuo calendario si aggiorna da solo alla successiva sincronizzazione."}}, {"@type": "Question", "name": "Quali corsi sono disponibili?", "acceptedAnswer": {"@type": "Answer", "text": "Tutti i corsi di laurea triennale, magistrale e a ciclo unico dell&#39;Università di Parma che pubblicano l'orario sul portale agendastudenti.unipr.it. Trovi l'elenco completo nella pagina Tutti i corsi."}}, {"@type": "Question", "name": "È gratis? Serve registrarsi?", "acceptedAnswer": {"@type": "Answer", "text": "È gratis e non serve alcun account: non raccogliamo dati personali. È un progetto indipendente, non affiliato a UNIPR."}}]}</script>
+
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/calendar.png" type="image/png">
+  <link rel="apple-touch-icon" href="/calendar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="/css/bootstrap.css" rel="stylesheet">
+  <link href="/css/template.css" rel="stylesheet">
+  <link href="/css/home.css" rel="stylesheet">
+  <link href="/css/theme.css" rel="stylesheet">
+  <script src="/scripts/theme.js"></script>
+  <script src="/scripts/catalog.js" defer></script>
+  <script src="/scripts/home.js" defer></script>
+</head>
+
+<body class="">
+<div class="container" id="main-container">
+  <header class="mt-5 mb-4">
+    <div class="topbar">
+      <h1 class="brand"><a href="/"><img src="/favicon.svg" alt=""> UNIPR <span class="accent">Calendar</span></a></h1>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Cambia tema">🌙</button>
+    </div>
+    <p class="subtitle">Porta l&#39;orario delle lezioni UNIPR su Google Calendar, Apple Calendar o Outlook. Scegli il tuo corso e solo gli insegnamenti che segui: il calendario si aggiorna da solo.</p>
+    <span class="pill" id="aa-label"></span>
+  </header>
+  <main id="box">
+    <form id="form_calendar" action="/corso" method="get">
+      <div class="field">
+        <label class="field-label" for="areas"><span class="field-num">1</span>Dipartimento</label>
+        <select id="areas" class="form-select" name="d">
+          <option value="">Seleziona il dipartimento</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="courses"><span class="field-num">2</span>Corso di studio</label>
+        <div id="courses-container">
+          <select id="courses" class="form-select" name="c"></select>
+          <div class="spinner-border loading-image-invisible" id="courses-loading" role="status"></div>
+        </div>
+      </div>
+      <div class="field">
+        <label class="field-label" for="years"><span class="field-num">3</span>Anno</label>
+        <select id="years" class="form-select" name="y"></select>
+      </div>
+      <div class="field">
+        <label class="field-label" for="curricula"><span class="field-num">4</span>Curriculum</label>
+        <div id="curricula-container">
+          <select id="curricula" class="form-select" name="a"></select>
+          <div class="spinner-border loading-image-invisible" id="curricula-loading" role="status"></div>
+        </div>
+      </div>
+      <input type="submit" id="submit-form-button" class="btn btn-primary btn-wide" value="Avanti →" disabled>
+      <div id="low-connection">Connessione debole...</div>
+      <div id="not-available">Siamo spiacenti, ma UNIPR non ha reso disponibile l&#39;orario per questo percorso sul portale pubblico.</div>
+    </form>
+  </main>
+
+  <section class="how" aria-label="Come funziona">
+    <div class="how-item"><span class="how-icon">🎓</span><strong>Scegli il corso</strong>Dipartimento, corso, anno e curriculum.</div>
+    <div class="how-item"><span class="how-icon">✅</span><strong>Filtra le lezioni</strong>Tieni solo gli insegnamenti che segui.</div>
+    <div class="how-item"><span class="how-icon">🔄</span><strong>Sempre aggiornato</strong>Le modifiche all&#39;orario arrivano da sole.</div>
+  </section>
+
+  <section class="seo-text mt-5" aria-labelledby="faq-title">
+    <h2 class="h4 fw-bold" id="faq-title">Orario lezioni UNIPR nel tuo calendario</h2>
+    <p>UNIPR Calendar trasforma l&#39;orario ufficiale delle lezioni dell&#39;Università di Parma in un calendario a cui iscriverti da Google Calendar, Apple Calendar (iPhone, iPad, Mac) o Outlook. Niente PDF da controllare ogni settimana: scegli il tuo corso, tieni solo gli insegnamenti che segui e ricevi aule, orari e annullamenti sempre aggiornati.</p>
+    <p><a href="/corsi/">Sfoglia tutti i corsi UNIPR per dipartimento →</a></p>
+    <h2 class="h5 fw-bold mt-4">Domande frequenti</h2>
+    <div class="faq">
+      <details class="faq-item"><summary>Come aggiungo l&#x27;orario delle lezioni UNIPR a Google Calendar?</summary><p>Scegli dipartimento, corso, anno e curriculum, seleziona gli insegnamenti che segui e clicca «Copia URL e Apri Google Calendar». Incolla il link in «Da URL» e il calendario compare tra i tuoi calendari.</p></details>
+      <details class="faq-item"><summary>Funziona anche con iPhone, Apple Calendar e Outlook?</summary><p>Sì. Il calendario è un normale feed iCal (.ics): su iPhone e Mac si apre con «Apri Apple Calendar», in Outlook o Thunderbird basta aggiungere il link come calendario da Internet.</p></details>
+      <details class="faq-item"><summary>Il calendario si aggiorna se cambia l&#x27;orario?</summary><p>Sì. Le lezioni vengono lette dal portale orari pubblico di UNIPR: quando cambia un&#x27;aula, un orario o una lezione viene annullata, il tuo calendario si aggiorna da solo alla successiva sincronizzazione.</p></details>
+      <details class="faq-item"><summary>Quali corsi sono disponibili?</summary><p><a href="/corsi/">Tutti i corsi</a> di laurea triennale, magistrale e a ciclo unico dell&#39;Università di Parma che pubblicano l&#x27;orario sul portale agendastudenti.unipr.it. Trovi l&#x27;elenco completo nella pagina Tutti i corsi.</p></details>
+      <details class="faq-item"><summary>È gratis? Serve registrarsi?</summary><p>È gratis e non serve alcun account: non raccogliamo dati personali. È un progetto indipendente, non affiliato a UNIPR.</p></details>
+    </div>
+  </section>
+</div>
+
+<footer class="footer-note text-center">
+  <p class="blockquote-footer mb-0">
+    Sito indipendente, <strong>non affiliato né approvato dall&#39;Università degli Studi di Parma (UNIPR)</strong>.<br>
+    Gli orari provengono dal portale pubblico <a href="https://agendastudenti.unipr.it/" target="_blank" rel="noopener">agendastudenti.unipr.it</a>: in caso di dubbi fa fede il sito ufficiale.<br>
+    Basato su <a href="https://github.com/FrancescoBonzi/UniboCalendar" target="_blank" rel="noopener">UniboCalendar</a> · Licenza AGPL-3.0 · <a href="https://github.com/Maccia21/uniprcalendar" id="source-link" target="_blank" rel="noopener">Codice sorgente</a>
+  </p>
+</footer>
+</body>
+
+</html>

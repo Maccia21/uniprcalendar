@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="it">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="Aggiungi l'orario delle lezioni UNIPR al tuo calendario (Google, Apple, Outlook), filtrando solo i corsi che segui.">
+  <meta name="robots" content="noindex, follow">
+  <meta name="theme-color" content="#005eb8">
+  <title>Aggiungi al calendario · UNIPR Calendar</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/calendar.png" type="image/png">
+  <link rel="apple-touch-icon" href="/calendar.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="/css/bootstrap.css" rel="stylesheet">
+  <link href="/css/template.css" rel="stylesheet">
+  <link href="/css/link.css" rel="stylesheet">
+  <link href="/css/theme.css" rel="stylesheet">
+  <script src="/scripts/theme.js"></script>
+  <script src="/scripts/link.js" defer></script>
+</head>
+
+<body class="page-link-wide">
+<div class="container" id="main-container">
+  <header class="mt-5 mb-4">
+    <div class="topbar">
+      <h1 class="brand"><a href="/"><img src="/favicon.svg" alt=""> UNIPR <span class="accent">Calendar</span></a></h1>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Cambia tema">🌙</button>
+    </div>
+    <p class="subtitle">Ultimo passo: scegli il calendario che usi e in un attimo hai finito.</p>
+  </header>
+  <div id="link-error" class="d-none mt-3"><h5 style="color: #dc3545;">Errore! L'indirizzo non è valido...</h5><a href="/">Torna alla home</a></div>
+        <section class="d-flex flex-column flex-md-row justify-content-around mt-4" id="box">
+            <!-- Google Calendar Box -->
+            <div class="cal-guide-box mb-4 mb-md-0">
+                <div class="cal-header">
+                    <img src="/media/google.png" alt="Google Calendar" class="cal-icon">
+                    <h3>Aggiungi a Google Calendar</h3>
+                </div>
+                <div class="cal-steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <p>Clicca il pulsante qui sotto per aprire Google Calendar (Desktop)</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <p>Incolla il link in  <kbd>URL del calendario</kbd></p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <p>Clicca <kbd>Aggiungi calendario</kbd></p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">4</span>
+                        <p>Ora lo troverai in <kbd>Altri calendari</kbd> dove puoi cambiare il nome</p>
+                    </div>
+                    <div class="step">
+                         <span class="step-number">⚠️</span>
+                         <p>Potresti dover attendere qualche minuto prima che appaiano gli eventi</p>
+                    </div>
+                </div>
+                <a href="https://calendar.google.com/calendar/u/0/r/settings/addbyurl" id="google-button" class="cal-button google-button">
+                   <img src="/media/google.png" alt="Google" class="button-icon"> Copia URL e Apri Google Calendar
+                </a>
+            </div>
+
+            <!-- Apple Calendar Box -->
+            <div class="cal-guide-box">
+                <div class="cal-header">
+                    <img src="/media/apple.png" alt="Apple Calendar" class="cal-icon">
+                    <h3>Aggiungi ad Apple Calendar</h3>
+                </div>
+                <div class="cal-steps">
+                    <div class="step">
+                        <span class="step-number">1</span>
+                        <p>Clicca il pulsante qui sotto per aprire l'app Calendario di Apple</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">2</span>
+                        <p>Clicca <kbd>Iscriviti</kbd></p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">3</span>
+                        <p>Scegli un nome (e.g. UNIPR Calendar) + conferma in alto a destra</p>
+                    </div>
+                    <div class="step">
+                        <span class="step-number">4</span>
+                        <p>Ora lo troverai tra i tuoi calendari <kbd>iCloud</kbd></p>
+                    </div>
+                    <div class="step">
+                         <span class="step-number">⚠️</span>
+                         <p>Potresti dover attendere qualche minuto prima che appaiano gli eventi</p>
+                    </div>
+                </div>
+                <a href="#" id="apple-button" class="cal-button apple-button">
+                   <img src="/media/apple.png" alt="Apple" class="button-icon"> Apri Apple Calendar
+                </a>
+            </div>
+
+        </section>
+  <div class="raw-link-card text-center" id="raw-link-box">
+    Altre app (Outlook, Thunderbird...): copia questo indirizzo e aggiungilo come calendario da URL
+    <code id="raw-link" class="user-select-all"></code>
+  </div>
+  <p class="mt-3"><a href="/">← Crea un altro calendario</a></p>
+</div>
+
+<footer class="footer-note text-center">
+  <p class="blockquote-footer mb-0">
+    Sito indipendente, <strong>non affiliato né approvato dall&#39;Università degli Studi di Parma (UNIPR)</strong>.<br>
+    Gli orari provengono dal portale pubblico <a href="https://agendastudenti.unipr.it/" target="_blank" rel="noopener">agendastudenti.unipr.it</a>: in caso di dubbi fa fede il sito ufficiale.<br>
+    Basato su <a href="https://github.com/FrancescoBonzi/UniboCalendar" target="_blank" rel="noopener">UniboCalendar</a> · Licenza AGPL-3.0 · <a href="https://github.com/Maccia21/uniprcalendar" id="source-link" target="_blank" rel="noopener">Codice sorgente</a>
+  </p>
+</footer>
+</body>
+
+</html>

@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /ics
+
+Sitemap: https://uniprcalendar.pages.dev/sitemap.xml
